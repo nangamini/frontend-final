@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eBook Library</title>
+  <!-- Link to Google Fonts for custom font -->
+  <link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
+  <style>
+    /* General body styling */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: transparent; 
+      margin: 0;
+      padding: 0;
+      display: flex;  /* Flexbox to center content */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Container that centers the form on the page */
+    .container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Background layer with a gradient and blur effect */
+    .background-layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(141deg, #7FC9E9 0%, #DCC4FA 0%, #8CD9E3 100%);
+      filter: blur();  /* Blurs the background */
+      z-index: -1;  /* Keeps the background behind the form */
+    }
+
+    /* Form card styling */
+    .form-card {
+      width: 450px;
+      height: 620px;
+      position: relative;
+      background: white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);  /* Adds a subtle shadow */
+      border-radius: 20px;
+      padding: 20px 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Main heading for the form */
+    .main-heading {
+      font-family: 'Viaoda Libre', serif;
+      font-size: 48px;
+      text-align: center;
+      margin: 0;
+    }
+
+    /* Subheading for form title */
+    .form-title {
+      font-size: 20px;
+      color: #4D4D4D;
+      text-align: center;
+    }
+
+    /* Styling for form groups (input fields with labels) */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Styling for form labels */
+    .form-group label {
+      font-weight: 600;
+      font-size: 16px;
+      color: #4D4D4D;
+    }
+
+    /* Styling for input fields */
+    .form-group input {
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #DCD9D9;
+      font-size: 16px;
+      outline: none;  /* Removes default outline on focus */
+    }
+
+    /* Styling for register button */
+    .register-btn {
+      background: #81BBD3;
+      color: white;
+      font-weight: 600;
+      padding: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      display: block;
+      text-decoration: none;  /* Removes underline from the link */
+    }
+
+    /* "Already a user?" section with login link */
+    .already-user {
+      text-align: center;
+      font-size: 16px;
+      color: #4D4D4D;
+    }
+
+    /* Styling for login link */
+    .already-user a {
+      font-weight: 700;
+      color: black;
+      text-decoration: none;
+      margin-left: 5px;  /* Small gap between text and link */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Background layer that sits behind the form -->
+    <div class="background-layer"></div>
+
+    <!-- Form card containing the form elements -->
+    <div class="form-card">
+      <h1 class="main-heading">eBook Library</h1>
+      <div class="form-title">Registration</div>
+
+      <!-- Registration number input field -->
+      <div class="form-group">
+        <label for="reg">Username</label>
+        <input type="text" id="reg" placeholder="12345678" />
+      </div>
+
+      <!-- Email input field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="username@ncl.ac.uk" />
+      </div>
+
+      <!-- Password input field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" />
+      </div>
+
+      <!-- Confirm password input field -->
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" placeholder="••••••••" />
+      </div>
+
+      <!-- Register button (link styled as a button) -->
+      <button id="registerBtn" class="register-btn">Register</button>
+
+      <!-- Text prompting already registered users to login -->
+      <p class="already-user">
+        Already a user? <a href="login.html">Login now</a>
+      </p>
+    </div>
+  </div>
+  <script>
+  
+  document.getElementById("registerBtn").addEventListener("click", async function(event) {
+  event.preventDefault(); // Prevent page reload
+
+  const username = document.getElementById("reg").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirm-password").value.trim();
+
+  // Log form input values for debugging
+  console.log("Form Data:", { username, email, password, confirmPassword });
+
+  if (!username || !email || !password || !confirmPassword) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password
+      })
+    });
+
+    if (response.ok) {
+      alert("Registration successful! Please check your email.");
+      window.location.href = "login.html";
+    } else {
+      const data = await response.json();
+      alert("Registration failed: " + data.msg);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred. Is the backend running?");
+  }
+});
+
+</script>
+
+</body>
+</html>

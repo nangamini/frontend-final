@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBook Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Inter:wght@400;700&family=Times+New+Roman&display=swap" rel="stylesheet">
+  <style>
+   /* -------------------- Reset & Base Styles -------------------- */
+/* Applies a base font and layout style to the page */
+body {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Viaoda Libre', serif;
+  overflow: scroll;
+}
+
+/* Ensures consistent box-sizing across elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Container holds the whole page layout and makes it scrollable */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+/* -------------------- Header -------------------- */
+/* Styles the top header bar with a gradient and spacing */
+header {
+  width: 100%;
+  background: linear-gradient(141deg, #7FC9E9 0%, #DCC4FA 0%, #8CD9E3 100%);
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sets the site title appearance */
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+}
+
+/* -------------------- Navigation Menu -------------------- */
+/* Styles the container holding navigation links */
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* Styles each nav link */
+.nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Adds hover effect to nav links */
+.nav a:hover {
+  background-color: #6f9fbc;
+}
+
+/* Adds space for icons in nav */
+.icon {
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+/* Styles dropdown arrows in nav */
+.arrow {
+  margin-left: 20px;
+  margin-top: 7px;
+  font-size: 1rem;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+/* Wrapper for dropdown menu and nav link */
+.menu-item {
+  position: relative;
+}
+
+/* Hidden dropdown menu by default */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f3f3f7;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Dropdown links style */
+.dropdown a {
+  color: #333;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Hover effect for dropdown links */
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+/* Rotates arrow icon when dropdown is open */
+.menu-item > a.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* -------------------- Search Bar -------------------- */
+/* Layout for search bar section */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Styles the text input box */
+.search-container input[type="text"] {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Styles the search button */
+.search-container button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  background-color: #6f9fbc;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for search button */
+.search-container button:hover {
+  background-color: #5a8cab;
+}
+
+/* -------------------- Main Content Box -------------------- */
+/* Styles main area of the page */
+.content-box {
+  width: 100%;
+  background-color: #F3F3F7;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+/* -------------------- Books Menu Link -------------------- */
+/* Styles the 'My Books' dropdown toggle */
+.booksMenu {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+/* Layout for icon + label in My Books */
+.books-link-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Hover effect for the 'My Books' link */
+.booksMenu:hover {
+  background-color: #6f9fbc;
+  text-decoration: none;
+}
+
+/* Ensures dropdown arrow in booksMenu rotates */
+.booksMenu .arrow {
+  margin: 0;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+/* -------------------- Grid Layout for Books -------------------- */
+/* Defines responsive grid for book cards */
+.grid-book-box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+/* -------------------- Individual Book Card -------------------- */
+/* Layout and style for each book container */
+.book {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+/* Placeholder cover image style */
+.book-cover {
+  width: 150px;
+  height: 220px;
+  background-color: #dcdcdc;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #999;
+  border-radius: 4px;
+}
+
+/* Container for title, description, etc. */
+.book-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Style for title and description spacing */
+.book-content h2,
+.book-content p {
+  margin: 4px 0;
+}
+
+/* -------------------- Loan Information Section -------------------- */
+/* Aligns loan info at bottom of book content */
+.loan-info {
+  margin-top: auto;
+}
+
+/* Text inside loan section */
+.loan-info p {
+  margin: 4px 0;
+}
+
+/* Buttons for reserve/return actions */
+.loan-info button {
+  margin: 5px 5px 0 0;
+  padding: 6px 12px;
+  border: none;
+  background-color: #6f9fbc;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for loan buttons */
+.loan-info button:hover {
+  background-color: #5a8cab;
+}
+
+/* -------------------- Review Button -------------------- */
+/* Styles the review button under each book */
+.review-button button {
+  padding: 6px 12px;
+  background-color: #6f9fbc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for review button */
+.review-button button:hover {
+  background-color: #5a8cab;
+}
+</style>
+</head> 
+<body>
+  <!-- ===== Page Container ===== -->
+  <div class="container">
+    
+    <!-- ===== Header Section ===== -->
+    <header>
+      <div class="title" role="heading" aria-level="1">eBook Library</div>
+
+      <!-- ===== Search Bar ===== -->
+      <div class="search-container">
+        <input type="text" placeholder="Search..." aria-label="Search">
+        <button type="submit" aria-label="Submit Search">Search</button>
+      </div>
+
+      <!-- ===== Navigation Menu ===== -->
+      <nav class="nav" aria-label="Main navigation">
+        <!-- Browse Dropdown -->
+        <div class="menu-item">
+          <a href="#" class="browse" aria-haspopup="true" aria-expanded="false">
+            <div class="icon"><img src="bars-solid.svg" alt="Browse Icon" width="20" height="20"></div>
+            Browse <span class="arrow" aria-hidden="true">▼</span>
+          </a>
+          <div class="dropdown" aria-labelledby="browse">
+            <a href="#">Fiction</a>
+            <a href="#">Non-fiction</a>
+            <a href="#">Sci-fi</a>
+          </div>
+        </div>
+
+        <!-- Home Link -->
+        <a href="homeRegistered.html" class="Home" role="button">
+          <div class="icon"><img src="house-solid.svg" alt="Home Icon" width="20" height="20"></div>
+          Home
+        </a>
+
+        <!-- User Dropdown -->
+        <div class="menu-item">
+          <a href="#" class="Profile" aria-haspopup="true" aria-expanded="false">
+            <div class="icon"><img src="user-solid.svg" alt="Profile Icon" width="20" height="20"></div>
+            User <span class="arrow" aria-hidden="true">▼</span>
+          </a>
+          <div class="dropdown" aria-labelledby="user">
+            <a href="myDetails.html">My Details</a>
+            <a href="login-security.html">Login & Security</a>
+          </div>
+        </div>
+
+        <!-- Sign Out -->
+        <a href="login.html" class="Sign-out" role="button">
+          <div class="icon"><img src="signout.svg" alt="Sign-out Icon" width="20" height="20"></div>
+          Sign Out
+        </a>
+      </nav>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <div class="content-box">
+
+      <!-- My Books Menu -->
+      <div class="menu-item">
+        <a href="#" class="booksMenu" aria-haspopup="true" aria-expanded="false">
+          <div class="books-link-content">
+            <div class="icon"><img src="user-solid.svg" alt="Books Menu Icon" width="20" height="20"></div>
+            <span class="link-text">MY BOOKS</span>
+            <span class="arrow" aria-hidden="true">▼</span>
+          </div>
+        </a>
+        <div class="dropdown">
+          <a href="wishlist.html">WISHLIST</a>
+        </div>
+      </div>
+
+      <!-- Books Grid -->
+      <main class="grid-book-box">
+        <div class="book">
+          <div class="book-cover" style="background-image: url('your-book-cover.jpg');"></div>
+          <div class="book-content">
+            <h2>Book Title</h2>
+            <p>Author: Author Name</p>
+            <div class="review-button">
+              <a href="reviews.html" class="button-link">Write a Review</a>
+            </div>
+            <div class="loan-info">
+              <p>Loaned: 12 Apr</p>
+              <p>Due: 30 Apr</p>
+              <button>Borrow</button>
+              <button>Return</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copy of book card -->
+        <div class="book">
+          <div class="book-cover" style="background-image: url('your-book-cover.jpg');"></div>
+          <div class="book-content">
+            <h2>Book Title</h2>
+            <p>Author: Author Name</p>
+            <div class="review-button">
+              <a href="reviews.html" class="button-link">Write a Review</a>
+            </div>
+            <div class="loan-info">
+              <p>Loaned: 12 Apr</p>
+              <p>Due: 30 Apr</p>
+              <button>Borrow</button>
+              <button>Return</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="book">
+          <div class="book-cover" style="background-image: url('your-book-cover.jpg');"></div>
+          <div class="book-content">
+            <h2>Book Title</h2>
+            <p>Author: Author Name</p>
+            <div class="review-button">
+              <a href="reviews.html" class="button-link">Write a Review</a>
+            </div>
+            <div class="loan-info">
+              <p>Loaned: 12 Apr</p>
+              <p>Due: 30 Apr</p>
+              <button>Borrow</button>
+              <button>Return</button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    </div> <!-- End of .content-box -->
+  </div> <!-- End of .container -->
+
+  <!-- ===== Dropdown Menu Script ===== -->
+  <script>
+    document.querySelectorAll('.menu-item > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isActive = this.classList.contains('active');
+
+        // Close all other dropdowns
+        document.querySelectorAll('.menu-item > a').forEach(a => {
+          a.classList.remove('active');
+          if (a.nextElementSibling) {
+            a.nextElementSibling.style.display = 'none';
+          }
+        });
+
+        // Toggle the clicked dropdown
+        if (!isActive) {
+          this.classList.add('active');
+          if (this.nextElementSibling) {
+            this.nextElementSibling.style.display = 'block';
+          }
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.menu-item')) {
+        document.querySelectorAll('.menu-item > a').forEach(a => {
+          a.classList.remove('active');
+          if (a.nextElementSibling) {
+            a.nextElementSibling.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

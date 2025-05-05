@@ -1,0 +1,235 @@
+/* Reset default styles and set consistent box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+/* Base styling for the body */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f0f9; /* Light lavender background */
+}
+ 
+/* Container to hold sidebar and main content side by side */
+.container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+ 
+/* === Sidebar === */
+.sidebar {
+    width: 250px;
+    background-color: #6a0dad; /* Purple background */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+ 
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    text-align: center; /* Centered title */
+}
+ 
+.sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center; /* Align icon and text */
+}
+ 
+.sidebar button i {
+    margin-right: 10px; /* Space between icon and text */
+}
+ 
+.sidebar button:hover {
+    background-color: #8a2be2; /* Hover effect for nav buttons */
+    border-radius: 5px;
+}
+ 
+/* Logout button styled separately with red */
+.sidebar .logout {
+    margin-top: auto; /* Push to bottom */
+    background-color: #ff4d4d;
+    border-radius: 5px;
+    font-weight: bold;
+}
+ 
+.sidebar .logout:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+ 
+/* === Main Content Area === */
+.main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto; /* Scroll when content overflows */
+}
+ 
+.section {
+    display: none; /* Hidden by default; likely toggled with JS */
+}
+ 
+.section h2 {
+    margin-bottom: 20px;
+    color: #6a0dad;
+}
+ 
+/* === Table Styling === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+ 
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+ 
+th {
+    background-color: #d9b3ff; /* Light purple headers */
+    color: #4b0082;
+}
+ 
+tr:hover {
+    background-color: #f1e6ff; /* Row hover effect */
+}
+ 
+/* === Upload Form === */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.upload-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #4b0082;
+}
+ 
+.upload-form input,
+.upload-form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+ 
+.upload-form button {
+    background-color: #6a0dad;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+ 
+.upload-form button i {
+    margin-right: 10px;
+}
+ 
+.upload-form button:hover {
+    background-color: #8a2be2; /* Lighter purple on hover */
+}
+ 
+/* === Review Management Buttons === */
+.approve, .dismiss {
+    background-color: #6a0dad;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+ 
+.approve i, .dismiss i {
+    margin-right: 5px;
+}
+ 
+.approve:hover {
+    background-color: #4b0082; /* Darker purple on hover */
+}
+ 
+.dismiss {
+    background-color: #ff4d4d; /* Red for dismiss */
+}
+ 
+.dismiss:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+ 
+/* === Popup Modal Styling === */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark translucent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Appear above other content */
+}
+ 
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+ 
+.popup-content p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #4b0082;
+}
+ 
+/* Popup buttons: confirm & cancel */
+.popup-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+ 
+.popup-buttons button i {
+    margin-right: 10px;
+}
+ 
+.popup-buttons button:first-child {
+    background-color: #6a0dad;
+    color: white;
+}
+ 
+.popup-buttons button:last-child {
+    background-color: #ff4d4d;
+    color: white;
+}
+ 

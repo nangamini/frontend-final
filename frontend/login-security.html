@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>eBook Library</title>
+  <style>
+    /* -------------------- Global Styles -------------------- */
+    /* Resets margin, padding, and sets box-sizing for all elements */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* -------------------- Body -------------------- */
+    /* General body styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* -------------------- Navbar -------------------- */
+    /* Styles the navigation bar at the top of the page */
+    .navbar {
+      background: linear-gradient(to right, #7c3aed, #4f46e5);
+      color: white;
+      padding: 2rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navbar container styling */
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    /* -------------------- Navbar Left Section -------------------- */
+    /* Styles for the left section of the navbar, logo and links */
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Logo section */
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Logo icon size and margin */
+    .logo-icon {
+      width: 32px;
+      margin-right: 0.5rem;
+    }
+
+    /* Logo text styling */
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Navbar navigation links */
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* Navbar link styling */
+    .nav-link {
+      color: #e0e7ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Hover effect for navbar links */
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    /* -------------------- Dropdown Menu -------------------- */
+    /* Styles the dropdown button and menu */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      background: none;
+      border: none;
+      color: #e0e7ff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+      position: absolute;
+      top: 2.2rem;
+      left: 0;
+      background: white;
+      color: #333;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+      flex-direction: column;
+      min-width: 160px;
+      z-index: 10;
+    }
+
+    /* Show dropdown menu when active */
+    .dropdown-menu.show {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dropdown menu item styling */
+    .dropdown-item {
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* Hover effect for dropdown items */
+    .dropdown-item:hover {
+      background: #e0e7ff;
+    }
+
+    /* -------------------- Navbar Right Section -------------------- */
+    /* Styles the right section of the navbar (search bar, login buttons) */
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Search bar styling */
+    .search-bar {
+      position: relative;
+    }
+
+    /* Search input field */
+    .search-input {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      width: 200px;
+    }
+
+    /* -------------------- Button Styling -------------------- */
+    /* General button styles */
+    .btn {
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Login button styling */
+    .btn-login {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    /* Sign up button styling */
+    .btn-signup {
+      background: white;
+      color: #4f46e5;
+    }
+
+    /* Settings button styling */
+    .btn-settings {
+      background: transparent;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    /* -------------------- Profile Box -------------------- */
+    /* Profile box container styling */
+    .profile-box {
+      width: 90%;
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Profile box title */
+    .profile-box h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: black;
+    }
+
+    /* Subtitle under profile box title */
+    .profile-box h2 {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+
+    /* -------------------- Input Group -------------------- */
+    /* Input group container */
+    .input-group {
+      width: 100%;
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-sizing: border-box;
+    }
+
+    /* Label for inputs */
+    .input-group label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* -------------------- Input Fields -------------------- */
+    /* Input field styling */
+    .input-group input {
+      padding: 12px;
+      border: 1px solid #E0E4EC;
+      border-radius: 8px;
+      background: #FAFBFC;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    /* -------------------- Button Container -------------------- */
+    /* Container for buttons in the profile box */
+    .button-container {
+      display: flex;
+      justify-content: left;
+      gap: 16px;
+      margin-top: auto;
+    }
+
+    /* Reset Password button styling */
+    .button-update {
+      width: 201px;
+      height: 37px;
+      background-color: #F4683C;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* -------------------- Form Styling -------------------- */
+    /* Form container for the update details form */
+    #update-details-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <!-- -------------------- Navbar -------------------- -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- -------------------- Navbar Left Section -------------------- -->
+      <div class="navbar-left">
+        <div class="navbar-logo">
+          <img src="LibraryLogo.jpeg" alt="eBook Library Logo" class="logo-icon" />
+          <span class="logo-text">eBook Library</span>
+        </div>
+        <div class="navbar-nav">
+          <a href="HomePage.html" class="nav-link">Home</a>
+        </div>
+      </div>
+
+      <!-- -------------------- Navbar Right Section -------------------- -->
+      <div class="navbar-right">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="Search books..." />
+        </div>
+        <button class="btn btn-login">Log in</button>
+        <a href="login.html">
+          <button class="btn btn-signup">Sign out</button>
+        </a>
+        <div class="dropdown" id="settingsDropdown">
+          <button class="dropdown-toggle btn-settings">⚙️</button>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <a href="myDetails.html" class="dropdown-item">My Details</a>
+            <a href="myBooks.html" class="dropdown-item">My Loans</a>
+            <a href="login-security.html" class="dropdown-item">Login & Security</a>
+            <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- -------------------- Profile Section -------------------- -->
+  <section class="profile-box">
+    <h1>LOGIN & SECURITY</h1>
+    <h2>Reset your password</h2>
+    <form id="update-details-form">
+      <div class="input-group">
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Enter Current Password">
+
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="Enter New Password">
+
+        <label for="retype-password">Retype Password</label>
+        <input type="password" id="retype-password" placeholder="Retype New Password">
+      </div>
+      <div class="button-container">
+        <button type="submit" class="button-update">Reset Password</button>
+      </div>
+    </form>
+  </section>
+
+  
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  // Dropdown functionality remains as is
+  const dropdowns = document.querySelectorAll(".dropdown");
+
+  dropdowns.forEach((dropdown) => {
+    const toggle = dropdown.querySelector(".dropdown-toggle");
+    const menu = dropdown.querySelector(".dropdown-menu");
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        menu.classList.toggle("show");
+
+        // Close dropdown if clicked outside
+        document.addEventListener(
+          "click",
+          function handler(event) {
+            if (!dropdown.contains(event.target)) {
+              menu.classList.remove("show");
+              document.removeEventListener("click", handler); // remove listener after one use
+            }
+          },
+          { once: true }
+        );
+      });
+    }
+  });
+
+  const searchInput = document.querySelector(".search-input");
+  if (searchInput) {
+    searchInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const value = searchInput.value.trim();
+        if (value) {
+          alert(`Search: ${value}`);
+        }
+      }
+    });
+  }
+
+  // Password reset logic remains
+  document.querySelector('.button-update').addEventListener('click', () => {
+    const current = document.getElementById('current-password').value.trim();
+    const newPwd = document.getElementById('new-password').value.trim();
+    const retype = document.getElementById('retype-password').value.trim();
+
+    if (!current || !newPwd || !retype) {
+      alert("All fields are required.");
+      return;
+    }
+
+    if (newPwd !== retype) {
+      alert("New passwords do not match.");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please log in again.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    fetch("http://localhost:8080/api/auth/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({
+        currentPassword: current,
+        newPassword: newPwd
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        alert("Password updated successfully. Please log in again.");
+        localStorage.removeItem("token"); // Remove the old token
+        window.location.href = "http://127.0.0.1:5500/login.html"; // Change according to the port on which you run the front end
+      } else {
+        return res.text().then(msg => {
+          alert("Failed to update password: " + msg);
+        });
+      }
+    })
+    .catch(err => {
+      alert("Error: " + err.message);
+    });
+  });
+
+  // Reset button function
+  document.querySelector('.button-update').addEventListener('click', () => {
+    document.getElementById('current-password').value = '';
+    document.getElementById('new-password').value = '';
+    document.getElementById('retype-password').value = '';
+  });
+});
+  </script>
+</body>
+</html>

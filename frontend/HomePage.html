@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>eBook Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- Left Section -->
+      <div class="navbar-left">
+        <div class="navbar-logo">
+          <!-- Replace 'logo.png' with your actual logo image path -->
+          <img src="LibraryLogo.jpeg" alt="eBook Library Logo" class="logo-icon" />
+          <span class="logo-text">eBook Library</span>
+        </div>
+        <div class="navbar-nav">
+          <a href="#" class="nav-link">Home</a>
+          <div class="dropdown">
+            <button class="dropdown-toggle">Browse</button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item">Popular</a>
+              <a href="#" class="dropdown-item">New Releases</a>
+              <a href="#" class="dropdown-item">Categories</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Section -->
+      <div class="navbar-right">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="Search books..." />
+        </div>
+        <button class="btn btn-login">Log in</button>
+        <a href="login.html">
+          <button class="btn btn-signup">Sign out</button>
+        </a>
+        <div class="dropdown" id="settingsDropdown">
+            <button class="dropdown-toggle btn-settings">⚙️</button>
+            <div class="dropdown-menu"  id="dropdownMenu">
+              <a href="myDetails.html" class="dropdown-item">My Details</a>
+              <a href="myBooks.html" class="dropdown-item">My Loans</a>
+              <a href="login-security.html" class="dropdown-item">Login & Security</a>
+              <a href="wishlist.html" class="dropdown-item">Wishlist</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+ 
+   <!-- Book Cards Grid -->
+   <main class="book-grid container" id="book-container">
+   
+   
+ 
+  </main>
+ 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const dropdowns = document.querySelectorAll(".dropdown");
+  
+    dropdowns.forEach((dropdown) => {
+      const toggle = dropdown.querySelector(".dropdown-toggle");
+      const menu = dropdown.querySelector(".dropdown-menu");
+  
+      if (toggle && menu) {
+        toggle.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // prevent global click handler from firing
+          menu.classList.toggle("show");
+  
+          // Close dropdown if clicked outside
+          document.addEventListener(
+            "click",
+            function handler(event) {
+              if (!dropdown.contains(event.target)) {
+                menu.classList.remove("show");
+                document.removeEventListener("click", handler); // remove listener after one use
+              }
+            },
+            { once: true }
+          );
+        });
+      }
+    });
+  });
+  
+  
+    const searchInput = document.querySelector(".search-input");
+    if (searchInput) {
+      searchInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          const value = searchInput.value.trim();
+          if (value) {
+            alert(`Search: ${value}`);
+          }
+        }
+      });
+    }
+  
+    // --- Fetch and Render Books ---
+    fetch("http://localhost:8080/books")
+      .then((res) => res.json())
+      .then((books) => {
+        const container = document.getElementById("book-container");
+        const details = document.getElementById("book-details");
+  
+        books.forEach((book) => {
+          const card = document.createElement("article");
+          card.className = "book-card";
+          card.innerHTML = `
+            <div class="book-cover">
+              <a href="./BookDetails.html?bookid=${book.bookid}">
+                <img src="${book.cover_image}" alt="${book.title}">
+              </a>
+            </div>
+            <span class="book-category">${book.genre}</span>
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author">by ${book.author}</p>
+            <p class="book-description">${book.description}</p>
+          `;
+          container.appendChild(card);
+  
+          // Add click handler to each card AFTER it's in the DOM
+          card.addEventListener("click", () => {
+            if (details) {
+              details.querySelector(".details-left").innerHTML = `
+                <h2>${book.title}</h2>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Category:</strong> ${book.genre}</p>
+                <p>${book.description}</p>
+                <p class="note">* Please sign up to borrow this book *</p>
+              `;
+              details.classList.remove("hidden");
+              details.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
+  
+        // Close details section
+        const closeBtn = document.getElementById("close-details");
+        if (closeBtn) {
+          closeBtn.addEventListener("click", () => {
+            if (details) details.classList.add("hidden");
+          });
+        }
+      });
+
+  </script>
+ 
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Librarian Panel</title>
+    <link rel="stylesheet" href="Admin.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin</h2>
+            <button onclick="showSection('bookManagement')">Book Management</button>
+            <button onclick="showSection('userLoans')">Users</button>
+            <button onclick="showSection('uploadBooks')">Upload Books</button>
+            <button onclick="showSection('reviewManagement')">Review Management</button>
+            <button class="logout">Logout</button>
+        </div>
+ 
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Book Management Section -->
+            <div id="bookManagement" class="section">
+                <h2>Book Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>The Strange Case of Dr. Jekyll and Mr. Hyde</td>
+                            <td>
+                                <button onclick="editBook('The Strange Case of Dr. Jekyll and Mr. Hyde')">Edit</button>
+                                <button onclick="deleteBook('The Strange Case of Dr. Jekyll and Mr. Hyde')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dracula</td>
+                            <td>
+                                <button onclick="editBook('Dracula')">Edit</button>
+                                <button onclick="deleteBook('Dracula')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Crime and Punishment</td>
+                            <td>
+                                <button onclick="editBook('Crime and Punishment')">Edit</button>
+                                <button onclick="deleteBook('Crime and Punishment')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pride and Prejudice</td>
+                            <td>
+                                <button onclick="editBook('Pride and Prejudice')">Edit</button>
+                                <button onclick="deleteBook('Pride and Prejudice')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alice in Wonderland</td>
+                            <td>
+                                <button onclick="editBook('Alice in Wonderland')">Edit</button>
+                                <button onclick="deleteBook('Alice in Wonderland')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>The Great Gatsby</td>
+                            <td>
+                                <button onclick="editBook('The Great Gatsby')">Edit</button>
+                                <button onclick="deleteBook('The Great Gatsby')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>The War of the Worlds</td>
+                            <td>
+                                <button onclick="editBook('The War of the Worlds')">Edit</button>
+                                <button onclick="deleteBook('The War of the Worlds')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Great Expectations</td>
+                            <td>
+                                <button onclick="editBook('Great Expectations')">Edit</button>
+                                <button onclick="deleteBook('Great Expectations')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>The Adventure of Sherlock Holmes</td>
+                            <td>
+                                <button onclick="editBook('The Adventure of Sherlock Holmes')">Edit</button>
+                                <button onclick="deleteBook('The Adventure of Sherlock Holmes')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>The Count of Monte Cristo</td>
+                            <td>
+                                <button onclick="editBook('The Count of Monte Cristo')">Edit</button>
+                                <button onclick="deleteBook('The Count of Monte Cristo')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treasure Island</td>
+                            <td>
+                                <button onclick="editBook('Treasure Island')">Edit</button>
+                                <button onclick="deleteBook('Treasure Island')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>The Wonderful Wizard of Oz</td>
+                            <td>
+                                <button onclick="editBook('The Wonderful Wizard of Oz')">Edit</button>
+                                <button onclick="deleteBook('The Wonderful Wizard of Oz')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gulliver's Travels</td>
+                            <td>
+                                <button onclick="editBook('Gulliver\'s Travels')">Edit</button>
+                                <button onclick="deleteBook('Gulliver\'s Travels')">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Winnie-the-Pooh</td>
+                            <td>
+                                <button onclick="editBook('Winnie-the-Pooh')">Edit</button>
+                                <button onclick="deleteBook('Winnie-the-Pooh')">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button onclick="addBook()">Add New Book</button>
+            </div>
+ 
+            <!-- User Loans Section -->
+            <div id="userLoans" class="section" style="display: none;">
+                <h2>Users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Usernames</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alice_007</td>
+                            <td><button onclick="deleteUser('Alice_007')">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>Ariaaaa</td>
+                            <td><button onclick="deleteUser('Ariaaaa')">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>MikeyCR7</td>
+                            <td><button onclick="deleteUser('MikeyCR7')">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>Nabil</td>
+                            <td><button onclick="deleteUser('Nabil')">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>Michelle59_!</td>
+                            <td><button onclick="deleteUser('Michelle59_!')">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>BookWorm121</td>
+                            <td><button onclick="deleteUser('BookWorm121')">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ 
+            <!-- Upload Books Section -->
+            <div id="uploadBooks" class="section" style="display: none;">
+                <h2>Upload New Book</h2>
+                <form class="upload-form">
+                    <label>Title:</label>
+                    <input type="text" placeholder="Enter book title" required>
+ 
+                    <label>Author:</label>
+                    <input type="text" placeholder="Enter author's name" required>
+ 
+                    <label>ISBN:</label>
+                    <input type="text" placeholder="Enter ISBN" required>
+ 
+                    <label>Genre:</label>
+                    <select required>
+                        <option value="">Select Genre</option>
+                        <option>Adventure</option>
+                        <option>Children's Literature</option>
+                        <option>Dystopian</option>
+                        <option>Epic</option>
+                        <option>Fanatsy</option>
+                        <option>Fiction</option>
+                        <option>Gothic</option>
+                        <option>Historical Fiction</option>
+                        <option>Horror</option>
+                        <option>Horror/Fiction</option>
+                        <option>Magical Realism</option>
+                        <option>Mystery</option>
+                        <option>Non-Fiction</option>
+                        <option>Philisophical Fiction</option>
+                        <option>Post-Apocalyptic</option>
+                        <option>Romance</option>
+                        <option>Satire</option>
+                        <option>Science Fiction</option>
+                        <option>Thriller</option>
+                        <option>Young Adult</option>
+                    </select>
+ 
+                    <label>Upload Book Image:</label>
+                    <input type="file" accept="image/*" required>
+ 
+                    <button type="submit">Upload Book</button>
+                </form>
+            </div>
+ 
+            <!-- Review Management Section -->
+            <div id="reviewManagement" class="section" style="display: none;">
+                <h2>Review Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Book Name</th>
+                            <th>Review</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alice_007</td>
+                            <td></td>
+                            <td>Great read!</td>
+                            <td class="review-status">Pending</td>
+                            <td>
+                                <button class="approve" onclick="handleAction(this, 'approve')">Approve</button>
+                                <button class="dismiss" onclick="handleAction(this, 'dismiss')">Dismiss</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ariaaaa</td>
+                            <td></td>
+                            <td>Absolutley amazing would definitely recommend</td>
+                            <td class="review-status">Pending</td>
+                            <td>
+                                <button class="approve" onclick="handleAction(this, 'approve')">Approve</button>
+                                <button class="dismiss" onclick="handleAction(this, 'dismiss')">Dismiss</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>MikeyCR7</td>
+                            <td>004</td>
+                            <td>Was decent worth a read</td>
+                            <td class="review-status">Pending</td>
+                            <td>
+                                <button class="approve" onclick="handleAction(this, 'approve')">Approve</button>
+                                <button class="dismiss" onclick="handleAction(this, 'dismiss')">Dismiss</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Confirmation Popup -->
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <div class="popup-buttons">
+                <button onclick="confirmAction()">Confirm</button>
+                <button onclick="closePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+ 
+        let currentButton;
+        let actionType;
+ 
+        function handleAction(button, type) {
+            currentButton = button;
+            actionType = type;
+            const statusCell = button.closest('tr').querySelector('.review-status');
+            const popupMessage = actionType === 'approve'
+                ? 'Are you sure you want to approve this review?'
+                : 'Are you sure you want to dismiss this review?';
+            document.getElementById('popup-message').textContent = popupMessage;
+            document.getElementById('popup').style.display = 'block';
+        }
+ 
+        function confirmAction() {
+            const statusCell = currentButton.closest('tr').querySelector('.review-status');
+            if (actionType === 'approve') {
+                statusCell.textContent = 'Approved';
+            } else if (actionType === 'dismiss') {
+                statusCell.textContent = 'Dismissed';
+            }
+            closePopup();
+        }
+ 
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+ 
+        function deleteUser(user) {
+            if (confirm(`Are you sure you want to delete the user ${user}?`)) {
+                alert(`${user} has been deleted.`);
+            }
+        }
+ 
+        function editBook(bookName) {
+            alert(`Editing book: ${bookName}`);
+        }
+ 
+        function deleteBook(bookName) {
+            if (confirm(`Are you sure you want to delete the book: ${bookName}?`)) {
+                alert(`${bookName} has been deleted.`);
+            }
+        }
+ 
+        function addBook() {
+            alert('Adding a new book');
+        }
+    </script>
+</body>
+</html>
+ 
