@@ -11,34 +11,40 @@
     <div class="navbar-container">
       <!-- Left Section -->
       <div class="navbar-left">
+        
         <div class="navbar-logo">
           <!-- Replace 'logo.png' with your actual logo image path -->
-          <img src="LibraryLogo.jpeg" alt="eBook Library Logo" class="logo-icon" />
+          <img src="LibraryLogo.png" alt="eBook Library Logo" class="logo-icon" />
           <span class="logo-text">eBook Library</span>
         </div>
+
         <div class="navbar-nav">
-          <a href="#" class="nav-link">Home</a>
-          <div class="dropdown">
-            <button class="dropdown-toggle">Browse</button>
-            <div class="dropdown-menu">
-              <a href="#" class="dropdown-item">Popular</a>
-              <a href="#" class="dropdown-item">New Releases</a>
-              <a href="#" class="dropdown-item">Categories</a>
-            </div>
-          </div>
+          <a href="#" class="nav-link"><span class="emoji">🏠</span><span class="nav-text">Home</span></a>
+
         </div>
       </div>
+  
       <!-- Right Section -->
       <div class="navbar-right">
+        <div class="dropdown">
+          <button class="dropdown-toggle"><span class="emoji">📚</span><span class="nav-text">Browse</span></button>
+
+          <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Popular</a>
+            <a href="#" class="dropdown-item">New Releases</a>
+            <a href="#" class="dropdown-item">Categories</a>
+          </div>
+        </div>
+  
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="Search books..." />
+          <button class="search-icon" onclick="handleSearchClick()">🔍</button>
         </div>
-        <button class="btn btn-login">Log in</button>
-        <a href="login.html">
-          <button class="btn btn-signup">Sign up</button>
-        </a>
-        <div class="dropdown" id="settingsDropdown">
-          </div>
+        
+  
+        <button class="btn btn-login"><span class="emoji">🔐</span>Log in</button>
+        <button class="btn btn-signup"><span class="emoji">🆕</span>Sign up</button>
+        <button class="btn btn-settings">⚙️</button>
       </div>
     </div>
   </nav>
